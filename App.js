@@ -1,11 +1,13 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import RootStack from "./src/stack/RootStack";
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text>Mi App iot</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
   );
 }
