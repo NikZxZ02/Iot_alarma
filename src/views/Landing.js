@@ -1,8 +1,11 @@
 import { View, Text, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Landing() {
+  const navigation = useNavigation();
+
   return (
     <View className="flex-1 bg-white flex flex-col">
       <StatusBar style="light" translucent />
@@ -14,7 +17,7 @@ export default function Landing() {
           <Text className="text-5xl font-bold mt-5">SecureShaker</Text>
           <Text>Protege tu hogar de otra forma</Text>
         </View>
-        <Button text="Comenzar" onPress={() => {}} />
+        <Button text="Comenzar" onPress={() => navigation.navigate("Login")} />
       </View>
     </View>
   );

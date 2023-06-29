@@ -2,8 +2,10 @@ import { TouchableOpacity, Text } from "react-native";
 
 /**
  * Componente que muestra un boton con texto
- * @param {String} text - texto del boton
- * @param {Function} onPress - funcion que se ejecuta al presionar el boton
+ *
+ * Props
+ * - text: texto del boton
+ * - onPress: funcion que se ejecuta al presionar el boton
  */
 export default function Button({ text, onPress }) {
   return (
