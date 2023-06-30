@@ -1,15 +1,13 @@
 import "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import RootStack from "./src/stack/RootStack";
-import AuthStack from "./src/stack/AuthStack";
+import { Provider } from "react-redux";
+import { store } from "./src/app/store";
+import StackMiddleware from "./src/middlewares/StackMiddleware";
 
 export default function App() {
   const session = false;
   return (
-    <NavigationContainer>
-      {session ? <RootStack /> : <AuthStack />}
-    </NavigationContainer>
+    <Provider store={store}>
+      <StackMiddleware />
+    </Provider>
   );
 }

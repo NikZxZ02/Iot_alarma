@@ -4,10 +4,9 @@ import { StatusBar } from "expo-status-bar";
 export default function Home() {
   return (
     <View className="flex-1 bg-white">
-      <StatusBar style="light" translucent />
-      <View className="w-full h-1/2 bg-primary rounded-b-[25px]" />
+      <StatusBar style="dark" translucent />
 
-      <View>
+      <View className="py-10">
         <Text>Home</Text>
       </View>
     </View>
