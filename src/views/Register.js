@@ -4,10 +4,15 @@ import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Login() {
+export default function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+
+  const onChangeName = (text) => {
+    setName(text);
+  };
 
   const onChangeEmail = (text) => {
     setEmail(text);
@@ -17,7 +22,7 @@ export default function Login() {
     setPassword(text);
   };
 
-  const handleLogin = () => {
+  const handleRegister = () => {
     // navigate to home page
   };
 
@@ -35,7 +40,12 @@ export default function Login() {
 
       {/* form */}
       <View>
-        <Text className="text-lg font-semibold mb-4">INICIAR SESIÓN</Text>
+        <Text className="text-lg font-semibold mb-4">REGISTRATE</Text>
+        <TextInput
+          placeholder={"Nombre"}
+          value={name}
+          onChangeText={onChangeName}
+        />
         <TextInput
           placeholder={"Email"}
           value={email}
@@ -48,12 +58,20 @@ export default function Login() {
           onChangeText={onChangePassword}
         />
         <View className="mb-4 flex-row justify-end">
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <Text className="text-xs underline">No tienes cuenta?</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Login")}
+            className="flex-row"
+          >
+            <Text className="text-xs">Si ya tienes cuenta, {""}</Text>
+            <Text className="text-xs underline">Inicia tu sesion</Text>
           </TouchableOpacity>
         </View>
+        <Text className="mb-4 text-xs opacity-60">
+          Al seleccionar "Crear Cuenta", significa que aceptas los Terminos de
+          Servicios y Politica de Privacidad
+        </Text>
 
-        <Button text={"Iniciar Sesión"} onPress={handleLogin} />
+        <Button text={"Crear Cuenta"} onPress={handleRegister} />
       </View>
     </View>
   );
