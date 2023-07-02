@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { Switch, Slider } from "@rneui/themed";
 
 export default function ConfigDevice() {
+  const [isActive, setIsActive] = useState(false);
+  const [sensibility, setSensibility] = useState(24);
   const navigation = useNavigation();
 
   return (
@@ -33,7 +37,11 @@ export default function ConfigDevice() {
           >
             <MaterialCommunityIcons name="lamp" size={24} color="black" />
           </TouchableOpacity>
-          <Text>Luz</Text>
+          <Switch
+            value={isActive}
+            onValueChange={setIsActive}
+            color="#34E0A1"
+          />
         </View>
         <View>
           <Text className="text-lg font-semibold">Alarma</Text>
@@ -43,8 +51,26 @@ export default function ConfigDevice() {
 
       {/* sensibilidad */}
       <View className="grow justify-center items-center">
-        <Text className="text-7xl font-bold">24</Text>
+        <Text className="text-7xl font-bold">{sensibility}</Text>
         <Text>Sensibilidad</Text>
+        <View className="py-6 w-full justify-center">
+          <Slider
+            value={sensibility}
+            onValueChange={setSensibility}
+            maximumValue={100}
+            minimumValue={0}
+            step={1}
+            allowTouchTrack
+            trackStyle={{ height: 60 }}
+            thumbStyle={{
+              height: 10,
+              width: 20,
+              backgroundColor: "transparent",
+            }}
+            minimumTrackTintColor="#34E0A1"
+            maximumTrackTintColor="#f2f2f2"
+          />
+        </View>
       </View>
     </View>
   );
