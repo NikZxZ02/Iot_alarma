@@ -16,9 +16,13 @@ export default function HomeDeviceItem({ index, max, lugar }) {
   const [isActive, setIsActive] = useState(false);
   const navigation = useNavigation();
 
+  const icons = ["door", "door-sliding", "doorbell", "window-closed-variant", "window-shutter"]; // Add more icons as needed
+
   const handlePress = () => {
-    navigation.navigate("ConfigDevice");
-  };
+    navigation.navigate("ConfigDevice", { icon });
+  };  
+
+  const icon = icons[index % icons.length];
 
   return (
     <TouchableOpacity
@@ -28,7 +32,7 @@ export default function HomeDeviceItem({ index, max, lugar }) {
       onPress={handlePress}
     >
       <View className="flex-row items-center justify-between">
-        <MaterialCommunityIcons name="lamp" size={24} color="black" />
+      <MaterialCommunityIcons name={icon} size={24} color="black" />
         <Switch value={isActive} onValueChange={setIsActive} color="#34E0A1" />
       </View>
       <Text className="mt-4">{lugar}</Text>

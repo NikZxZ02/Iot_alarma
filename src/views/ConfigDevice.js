@@ -5,10 +5,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Switch, Slider } from "@rneui/themed";
 
-export default function ConfigDevice() {
+export default function ConfigDevice({ route }) {
   const [isActive, setIsActive] = useState(false);
   const [sensibility, setSensibility] = useState(24);
   const navigation = useNavigation();
+
+  const { icon } = route.params;
 
   return (
     <View className="flex-1 bg-white py-10 px-6 flex-col">
@@ -35,7 +37,7 @@ export default function ConfigDevice() {
             activeOpacity={0.1}
             className="bg-primary p-2 rounded-full"
           >
-            <MaterialCommunityIcons name="lamp" size={24} color="black" />
+            <MaterialCommunityIcons name={icon} size={24} color="black" />
           </TouchableOpacity>
           <Switch
             value={isActive}
