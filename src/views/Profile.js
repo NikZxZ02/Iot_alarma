@@ -15,7 +15,7 @@ export default function Profile() {
         <Text className="text-2xl font-bold">Informacion Personal</Text>
         <View className="mt-4">
           <Text className="text-lg font-bold">Tipo de cuenta:</Text>
-          <Text className="text-lg">Gratuita</Text>
+          <Text className="text-lg">Plan Basico</Text>
         </View>
         <View className="mt-2">
           <Text className="text-lg font-bold">Direccion Hogar:</Text>

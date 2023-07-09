@@ -1,5 +1,4 @@
-import { useCallback, useEffect } from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Alert  } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeDeviceItem from "./components/HomeDeviceItem";
@@ -12,9 +11,18 @@ const DEVICES = [
   { id: 5, lugar: "Ventana comedor" },
 ];
 
+const showAlert = (title, message, type) => {
+  Alert.alert(title, message, [
+    {
+      text: 'Entendido',
+      style: type === 'error' ? 'cancel' : 'default',
+    },
+  ]);
+};
+
 export default function Home() {
   const addDevice = () => {
-    console.log("add device");
+    showAlert('Maximo de dispositivos alcanzado', 'Su plan solo permite conectar un maximo de 5 dispositivos', 'warning');
   };
 
   return (
