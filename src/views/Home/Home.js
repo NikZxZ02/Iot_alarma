@@ -1,8 +1,11 @@
-import { useCallback, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeDeviceItem from "./components/HomeDeviceItem";
+import { io } from "socket.io-client";
+import { useDispatch } from "react-redux";
+import { setDevice, setIsLoadingDevice } from "../../slices/deviceSlice";
 
 const DEVICES = [
   { id: 1, lugar: "Puerta Delantera" },
@@ -12,7 +15,37 @@ const DEVICES = [
   { id: 5, lugar: "Ventana comedor" },
 ];
 
+const socket = io("https://iot-vibration-api.onrender.com");
+
 export default function Home() {
+  const [value, setValue] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setIsLoadingDevice(true));
+    socket.on("connect", () => {
+      console.log("Conectado al servidor socket");
+    });
+
+    socket.on("message", (data) => {
+      const result = JSON.parse(data);
+      const { client } = result;
+      //setValue(client.value);
+
+      dispatch(setDevice({ value: client.value }));
+      dispatch(setIsLoadingDevice(false));
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Desconectado del servidor socket");
+    });
+
+    // Limpia el socket al desmontar el componente
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   const addDevice = () => {
     console.log("add device");
   };
