@@ -6,7 +6,6 @@ import HomeDeviceItem from "./components/HomeDeviceItem";
 import { io } from "socket.io-client";
 import { useDispatch } from "react-redux";
 import { setDevice, setIsLoadingDevice } from "../../slices/deviceSlice";
-import { Notifications } from "expo";
 
 
 const DEVICES = [
@@ -45,9 +44,6 @@ export default function Home() {
       dispatch(setDevice({ value: client.value }));
       dispatch(setIsLoadingDevice(false));
 
-      if (client.value > 100) {
-        sendNotification();
-      }
     });
 
     socket.on("disconnect", () => {
@@ -66,16 +62,6 @@ export default function Home() {
       "Su plan solo permite conectar un maximo de 5 dispositivos",
       "warning"
     );
-  };
-
-  const sendNotification = async () => {
-    const notificationContent = {
-      title: "Alarma activada",
-      body: `The client value (${value}) has exceeded the threshold.`,
-    };
-
-    // Send the notification using Expo's Notifications API
-    await Notifications.presentLocalNotificationAsync(notificationContent);
   };
 
   return (
